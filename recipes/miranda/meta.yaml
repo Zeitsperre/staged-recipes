@@ -1,0 +1,70 @@
+{% set name = "miranda" %}
+{% set version = "0.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 32a549016efe0cfad42eeb96b425ea239969b6b3cece87882f70d4153957aea7
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python
+    - packaging
+    - pip
+  run:
+  - python
+  - cftime
+  - clisops
+  - dask-core
+  - fiona
+  - geojson
+  - h5netcdf
+  - netcdf4
+  - numpy
+  - geopandas
+  - pandas
+  - packaging
+  - pint
+#  - pyessv  # noy yet available
+  - pyproj
+  - pyyaml
+  - rasterio
+  - schema
+  - shapely
+  - xarray
+  - xclim
+  - zarr
+
+test:
+  imports:
+    - miranda
+  requires:
+    - pip
+  commands:
+    - pip check
+
+about:
+  home: https://github.com/Ouranosinc/miranda
+  summary: 'A modern Python utility library for climate data collection and management'
+  description: |
+    miranda is a climate services tool for fetching, converting, structuring, and 
+    archiving datasets from various providers, using existing APIs and services.
+    Converted datasets comply with Climate and Forecasting convention standards and
+    metadata adhere to working standards developed by the Ouranos consortium.
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  doc_url: https://miranda.readthedocs.io/
+  dev_url: https://github.com/Ouranosinc/miranda
+
+extra:
+  recipe-maintainers:
+    - Zeitsperre

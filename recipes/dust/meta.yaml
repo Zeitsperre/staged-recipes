@@ -11,7 +11,8 @@ source:
 build:
   number: 0
   script:
-    - RUSTFLAGS="-Clink-args=-Wl,-L$PREFIX/lib" cargo install --path . --root "$PREFIX"  # [unix]
+    - RUSTFLAGS="-Clink-args=-Wl,-L$PREFIX/lib" cargo install --path . --root "$PREFIX"  # [linux]
+    - cargo install --path . --root "$PREFIX"                                           # [osx]
     - cargo install --path . --root "%LIBRARY_PREFIX%"                                   # [win]
     - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 
